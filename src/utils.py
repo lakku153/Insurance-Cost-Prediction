@@ -1,24 +1,19 @@
 import pandas as pd 
-import sqlalchemy
+import numpy as np 
 import sys
+import os
+import dill
 
+from src.exception import CustomException
+from src.logger import logging
 
-def create_engine(server,database):
-    connection_string = f'mssql+pymssql://{server}:1434/{database}'
-    engine_ = sqlalchemy.create_engine(connection_string)
-    return engine_
+def save_obj(file_path,obj):
+    try:
+        dir_path=os.path.dirname(file_path)
+        os.makedirs(dir_path,exist_ok=True)
 
-def fetch_data(engine,table_name):
-    query=f"select * from {table_name}"
-    df=pd.read_sql(query,engine)
-    return df
-
-
-server = 'localhost'
-database = 'master'
-table_name = 'Insurance'
-
-def get_engine():
-    return create_engine(server,database)
-print(get_engine())
-
+        with open(file_path,'wb') as file_obj:
+            dill.dump(obj,file_obj)
+    
+    except Exception as e:
+        raise CustomException(e,sys)
