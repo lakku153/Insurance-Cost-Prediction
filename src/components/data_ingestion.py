@@ -1,5 +1,5 @@
 import sys
-print(sys.path)
+# print(sys.path)
 import pandas as pd 
 import sqlalchemy
 from src.exception import CustomException

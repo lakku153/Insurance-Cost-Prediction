@@ -6,4 +6,5 @@ pymssql
 dill
 xgboost
 catboost
+sklearn
 #-e .
