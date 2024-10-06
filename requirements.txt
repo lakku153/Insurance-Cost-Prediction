@@ -4,4 +4,6 @@ seaborn
 matplotlib
 pymssql
 dill
+xgboost
+catboost
 #-e .
